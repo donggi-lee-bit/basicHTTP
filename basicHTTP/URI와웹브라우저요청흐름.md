@@ -61,3 +61,18 @@ URI(Uniform Resource Identifier)
 - key = value 형태
 - `?` 로 시작, `&` 로 추가 가능 ?keyA=valueA&keyB=valueB
 - query parameter, query string 등으로 불림, 웹서버에 제공하는 파라미터. 문자 형태
+
+## 웹 브라우저 요청 흐름
+- https://www.google.com:443/search?q=hello&hl=ko 를 웹 브라우저가 요청한다.
+- 구글 서버를 찾기 위해 `DNS`를 조회해서 IP를 찾고 `port` 정보를 찾는다.
+- HTTP 요청 메시지 생성
+    - 요청 메시지 : GET /search?q=hello&hl=ko HTTP/1.1 HOST: www.google.com
+- 요청 패킷 전달
+- 구글 서버에 패킷이 도착하면 TCP/IP 까서 HTTP 메시지를 끄집어내어 해석을 한다.
+- 구글 웹 서버에서 HTTP 응답 메시지 응답 패킷에 담아 웹 브라우저로 보낸다.
+- 웹 브라우저에서 html 데이터를 렌더링한다.
+
+### HTTP 메시지 전송
+1. 웹 브라우저가 HTTP 메시지 생성
+2. `socket` 라이브러리를 통해 전달
+3. TCP/IP 패킷 생성, HTTP 메시지 포함
