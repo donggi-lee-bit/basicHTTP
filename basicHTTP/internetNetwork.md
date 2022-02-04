@@ -91,6 +91,8 @@ Packet = package + bucket 의 합성어
 ## PORT
 
 같은 IP 내에서 프로세스를 구분하는 게 PORT.
+<br>
+같은 아파트 내에 몇동 몇호같은 개념.
 
 - 0 ~ 65535 : 할당 가능
 - 0 ~ 1023 : 잘 알려진 포트, 사용하지 않는 것이 좋다.
@@ -98,3 +100,12 @@ Packet = package + bucket 의 합성어
     - TLENET - 23
     - HTTP - 80
     - HTTPS - 443
+
+## DNS
+
+IP는 기억하기 어렵고 변경될 수 있다.
+<br>
+DNS 도메인 네임 시스템 (Domain Name System)
+- 전화번호부
+- 도메인 명을 IP주소로 변환
+
