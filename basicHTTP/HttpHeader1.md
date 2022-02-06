@@ -78,3 +78,64 @@ message body - RFC7230(최신)
 표현 데이터의 길이
 - 바이트 단위
 - Transfer-Encoding을 사용하면 Content-Length를 사용하면 안 됨
+
+## 협상 (Content 네고)
+클라이언트가 선호하는 표현 요청
+- Accept : 클라이언트가 선호하는 미디어 타입 전달
+- Accept-Charset : 클라이언트가 선호하는 문자 인코딩
+- Accept-Encoding : 클라이언트가 선호하는 압축 인코딩
+- Accept-Language : 클라이언트가 선호하는 자연 언어
+- 협상 헤더는 **요청시에만** 사용
+
+### 협상과 우선순위1
+Quality Values(q)
+- Quality Values(q) 값 사용
+- 0~1, 클수록 높은 우선순위
+- 생략하면 1
+- Accept-Language : ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+    1. ko-KR;q=1 (q생략)
+    2. ko;q=0.9
+    3. en-US;q=0.8
+    4. en;q=0.7
+
+### 협상과 우선순위2
+Quality Values(q)
+- 구체적인 것이 우선
+- Accept: text/*, text/plain, text/plain;format=flowed, */*
+    1. text/plain;format=flowed
+    2. text/plain
+    3. text/*
+    4. */*
+
+### 협상과 우선순위3
+Quality Values(q)
+- 구체적인 것을 기준으로 미디어 타입을 맞춘다.
+- Accept : text/*;q=0.3, text/html;q=0.7, text/html;level=1, text/html;level=2;q=0.4, */*;q=0.5
+
+|Media Type|Quality|
+|---|---|
+|text/html;level=1|1|
+|text/html|0.7|
+|text/plain|0.3|
+|image/jpeg|0.5|
+|text/html;level=2|0.4|
+|text/html;level=3|0.7|
+
+## 전송 방식
+
+### 단순 전송
+Content-Length
+- 한 번에 요청하고 한 번에 받는 것
+
+### 압축 전송
+Content-Encoding
+- 예로 단순 전송했던 것을 gzip 같은 것으로 압축해서 요청하는 것
+
+### 분할 전송
+Transfer-Encoding
+- chunked : 덩어리 로 보낸다
+- Content-Length 를 보내면 안됨
+
+### 범위 전송
+Range, Content-Range
+- 예로 이미지를 받는데 중간에 끊겨서 다시 요청할 때 처음부터 다시 받으면 용량이 낭비되기 때문에 끊긴 부분부터 범위 전송을 요청한다.
