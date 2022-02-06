@@ -117,3 +117,20 @@ ETag, If-None-Match
     - If-Match, If-None-Match : ETag 값 사용
     - If-Modified-Since, If-Unmodified-Since : Last-Modified 값 사용
 
+## 프록시 캐시
+
+### 프록시 캐시 도입
+- 한국에 있는 클라이언트가 미국에 있는 origin 서버에 접근하려면 많은 시간이 걸린다.
+- 미국 origin 서버에서 한국 어딘가에 프록시 캐시 서버를 만들어서 거기로 접근하게 한다
+- 한국의 클라이언트는 미국의 origin 보다 가까이 있는 프록시 캐시 서버로 접근하게 된다.
+
+### Cache-Control
+캐시 지시어 - 기타
+- Cache-Control : public
+    - 응답이 public 캐시에 저장되어도 됨
+- Cache-Control : private
+    - 응답이 해당 사용자만을 위한 것임, private 캐시에 저장해야한다 (default)
+- Cache-Control : s-maxage
+    - 프록시 캐시에만 적용되는 max-age
+- Age : 60 (HTTP 헤더)
+    - 오리진 서버에서 응답 후 프록시 캐시 내에 머문 시간 (초)
